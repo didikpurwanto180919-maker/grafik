@@ -108,7 +108,7 @@ with col2:
       )
   )
 
-  # Layout Grafik dengan Tema Gelap & Neon Accents
+  # Layout Grafik dengan Posisi Legenda di Bawah Agar Tidak Menutupi Anotasi
   fig.update_layout(
       title="<b>Trending Kejadian Gangguan & Downtime (Neon Theme)</b>",
       xaxis=dict(title="Tahun", dtick=1, gridcolor="rgba(255,255,255,0.1)"),
@@ -124,8 +124,11 @@ with col2:
           showgrid=False,
       ),
       legend=dict(
-          x=0.01,
-          y=0.99,
+          orientation="h",
+          yanchor="bottom",
+          y=-0.25,
+          xanchor="center",
+          x=0.5,
           bgcolor="rgba(17, 24, 39, 0.8)",
           bordercolor="#00f3ff",
           borderwidth=1,
@@ -134,10 +137,11 @@ with col2:
       paper_bgcolor="rgba(0,0,0,0)",
       plot_bgcolor="rgba(17, 24, 39, 0.6)",
       hovermode="x unified",
-      height=480,
+      height=500,
+      margin=dict(t=50, b=80),
   )
 
-  # Menambahkan Anotasi Interaktif dengan Kotak Neon
+  # Menambahkan Anotasi Interaktif dengan Posisi Aman
   fig.add_annotation(
       x=2021,
       y=685,
@@ -145,7 +149,7 @@ with col2:
       showarrow=True,
       arrowhead=2,
       arrowcolor="#ff6600",
-      ax=-50,
+      ax=-30,
       ay=-40,
       bgcolor="rgba(255, 102, 0, 0.2)",
       bordercolor="#ff6600",
@@ -160,7 +164,7 @@ with col2:
       showarrow=True,
       arrowhead=2,
       arrowcolor="#ff6600",
-      ax=60,
+      ax=40,
       ay=-40,
       bgcolor="rgba(255, 102, 0, 0.2)",
       bordercolor="#ff6600",
