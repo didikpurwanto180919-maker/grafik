@@ -99,7 +99,7 @@ with col2:
       )
   )
 
-  # Bar Chart untuk Frekuensi (Kali) - Warna Neon Cyan/Biru
+  # Bar Chart untuk Frekuensi (Kali) - Warna Neon Cyan/Biru dengan Label Angka di Dalamnya
   fig.add_trace(
       go.Bar(
           x=df["Tahun"],
@@ -107,7 +107,12 @@ with col2:
           name="Frekuensi (kali)",
           marker_color="#00f3ff",
           yaxis="y2",
-          opacity=0.65,
+          text=df["Frekuensi"],  # Memunculkan angka nilai data pada batang
+          textposition="inside",  # Posisi teks di dalam batang
+          textfont=dict(
+              color="#0b0f19", size=12, family="Arial Black"
+          ),  # Warna teks kontras dengan batang
+          opacity=0.75,
       )
   )
 
