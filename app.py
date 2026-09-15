@@ -90,16 +90,15 @@ with col2:
       )
   )
 
-  # Layout Grafik
+  # Layout Grafik (Diperbarui sesuai standar Plotly versi terbaru)
   fig.update_layout(
       title="<b>Trending Kejadian Gangguan & Downtime</b>",
-      xaxis=dict(title="Tahun", tickmode="linear"),
+      xaxis=dict(title="Tahun", dtick=1),
       yaxis=dict(
-          title="<b>Downtime (menit)</b>", titlefont=dict(color="#FF6600")
+          title=dict(text="<b>Downtime (menit)</b>", font=dict(color="#FF6600"))
       ),
       yaxis2=dict(
-          title="<b>Frekuensi (kali)</b>",
-          titlefont=dict(color="#003366"),
+          title=dict(text="<b>Frekuensi (kali)</b>", font=dict(color="#003366")),
           overlaying="y",
           side="right",
           range=[0, 5],
