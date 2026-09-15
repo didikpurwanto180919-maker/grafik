@@ -18,7 +18,7 @@ st.markdown(
     
     /* Neon Box Container */
     .neon-box {
-        background: rgba(17, 24, 39, 0.7);
+        background: rgba(17, 24, 39, 0.9);
         border: 2px solid #00f3ff;
         box-shadow: 0 0 15px rgba(0, 243, 255, 0.4), inset 0 0 15px rgba(0, 243, 255, 0.2);
         border-radius: 12px;
@@ -87,9 +87,12 @@ with col2:
           mode="lines+markers+text",
           text=df["Downtime"],
           textposition="top center",
+          textfont=dict(
+              color="#ffffff", size=13, family="Arial Black"
+          ),  # Warna teks nilai putih terang agar sangat jelas
           line=dict(color="#ff6600", width=4),
           marker=dict(
-              size=10,
+              size=11,
               color="#ff6600",
               line=dict(color="#ffffff", width=2),
           ),
@@ -104,17 +107,23 @@ with col2:
           name="Frekuensi (kali)",
           marker_color="#00f3ff",
           yaxis="y2",
-          opacity=0.6,
+          opacity=0.65,
       )
   )
 
-  # Layout Grafik dengan Posisi Legenda di Bawah Agar Tidak Menutupi Anotasi
+  # Layout Grafik dengan Rentang Sumbu Y yang Luas agar Teks & Anotasi Jelas Terlihat
   fig.update_layout(
       title="<b>Trending Kejadian Gangguan & Downtime (Neon Theme)</b>",
-      xaxis=dict(title="Tahun", dtick=1, gridcolor="rgba(255,255,255,0.1)"),
+      xaxis=dict(
+          title="Tahun",
+          dtick=1,
+          gridcolor="rgba(255,255,255,0.15)",
+          range=[2020.5, 2026.5],
+      ),
       yaxis=dict(
           title=dict(text="<b>Downtime (menit)</b>", font=dict(color="#ff6600")),
-          gridcolor="rgba(255,255,255,0.1)",
+          gridcolor="rgba(255,255,255,0.15)",
+          range=[-50, 850],  # Ruang atas & bawah dibuat lega
       ),
       yaxis2=dict(
           title=dict(text="<b>Frekuensi (kali)</b>", font=dict(color="#00f3ff")),
@@ -126,65 +135,66 @@ with col2:
       legend=dict(
           orientation="h",
           yanchor="bottom",
-          y=-0.25,
+          y=-0.28,
           xanchor="center",
           x=0.5,
-          bgcolor="rgba(17, 24, 39, 0.8)",
+          bgcolor="rgba(17, 24, 39, 0.95)",
           bordercolor="#00f3ff",
-          borderwidth=1,
+          borderwidth=1.5,
+          font=dict(color="white"),
       ),
       template="plotly_dark",
       paper_bgcolor="rgba(0,0,0,0)",
-      plot_bgcolor="rgba(17, 24, 39, 0.6)",
+      plot_bgcolor="rgba(17, 24, 39, 0.7)",
       hovermode="x unified",
-      height=500,
-      margin=dict(t=50, b=80),
+      height=520,
+      margin=dict(t=70, b=90, l=60, r=60),
   )
 
-  # Menambahkan Anotasi Interaktif dengan Posisi Aman
+  # Menambahkan Anotasi Interaktif dengan Latar Belakang Solid Kontras Tinggi
   fig.add_annotation(
       x=2021,
-      y=685,
-      text="Gangguan Kondensor",
+      y=740,
+      text="<b>Gangguan Kondensor</b>",
       showarrow=True,
       arrowhead=2,
       arrowcolor="#ff6600",
-      ax=-30,
-      ay=-40,
-      bgcolor="rgba(255, 102, 0, 0.2)",
+      ax=0,
+      ay=-35,
+      bgcolor="rgba(17, 24, 39, 0.95)",
       bordercolor="#ff6600",
-      borderwidth=1,
-      font=dict(color="white"),
+      borderwidth=1.5,
+      font=dict(color="#ff6600", size=12),
   )
 
   fig.add_annotation(
       x=2025,
-      y=672,
-      text="Pemeliharaan Debris",
+      y=740,
+      text="<b>Pemeliharaan Debris</b>",
       showarrow=True,
       arrowhead=2,
       arrowcolor="#ff6600",
-      ax=40,
-      ay=-40,
-      bgcolor="rgba(255, 102, 0, 0.2)",
+      ax=0,
+      ay=-35,
+      bgcolor="rgba(17, 24, 39, 0.95)",
       bordercolor="#ff6600",
-      borderwidth=1,
-      font=dict(color="white"),
+      borderwidth=1.5,
+      font=dict(color="#ff6600", size=12),
   )
 
   fig.add_annotation(
       x=2026,
-      y=20,
+      y=180,
       text="<b>Implementasi Marvel System</b><br>(Zero Gangguan)",
       showarrow=True,
       arrowhead=2,
       arrowcolor="#00f3ff",
-      ax=80,
-      ay=-60,
-      bgcolor="rgba(0, 243, 255, 0.2)",
+      ax=0,
+      ay=-45,
+      bgcolor="rgba(17, 24, 39, 0.95)",
       bordercolor="#00f3ff",
-      borderwidth=1,
-      font=dict(color="#00f3ff"),
+      borderwidth=1.5,
+      font=dict(color="#00f3ff", size=12),
   )
 
   st.plotly_chart(fig, use_container_width=True)
