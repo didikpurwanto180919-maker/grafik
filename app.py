@@ -78,7 +78,7 @@ with col2:
   # --- GRAFIK NEON STYLE ---
   fig = go.Figure()
 
-  # 1. Bar Chart untuk Frekuensi (Kali) - Ditaruh pertama dengan teks di posisi 'outside'
+  # 1. Bar Chart untuk Frekuensi (Kali) - Tanpa teks angka di batangnya agar bersih dari tumpukan
   fig.add_trace(
       go.Bar(
           x=df["Tahun"],
@@ -86,14 +86,11 @@ with col2:
           name="Frekuensi (kali)",
           marker_color="#00f3ff",
           yaxis="y2",
-          text=df["Frekuensi"],
-          textposition="outside",  # Angka berada di atas batang, mencegah tumpang tindih
-          textfont=dict(color="#00f3ff", size=12, family="Arial Black"),
-          opacity=0.6,
+          opacity=0.55,
       )
   )
 
-  # 2. Line Chart untuk Downtime (Menit) - Warna Neon Oranye ditaruh di atasnya
+  # 2. Line Chart untuk Downtime (Menit) - Dilengkapi angka nilai di atas titik garis
   fig.add_trace(
       go.Scatter(
           x=df["Tahun"],
@@ -112,7 +109,7 @@ with col2:
       )
   )
 
-  # Layout Grafik dengan Rentang Sumbu Y yang Lega agar Tidak Bertumpuk
+  # Layout Grafik dengan Rentang Sumbu Y yang Lega & Bersih
   fig.update_layout(
       title="<b>Trending Kejadian Gangguan & Downtime (Neon Theme)</b>",
       xaxis=dict(
@@ -130,7 +127,7 @@ with col2:
           title=dict(text="<b>Frekuensi (kali)</b>", font=dict(color="#00f3ff")),
           overlaying="y",
           side="right",
-          range=[0, 6],  # Diperbesar agar teks 'outside' batangnya aman
+          range=[0, 6],
           showgrid=False,
       ),
       legend=dict(
