@@ -78,7 +78,22 @@ with col2:
   # --- GRAFIK NEON STYLE ---
   fig = go.Figure()
 
-  # Line Chart untuk Downtime (Menit) - Warna Neon Oranye
+  # 1. Bar Chart untuk Frekuensi (Kali) - Ditaruh pertama dengan teks di posisi 'outside'
+  fig.add_trace(
+      go.Bar(
+          x=df["Tahun"],
+          y=df["Frekuensi"],
+          name="Frekuensi (kali)",
+          marker_color="#00f3ff",
+          yaxis="y2",
+          text=df["Frekuensi"],
+          textposition="outside",  # Angka berada di atas batang, mencegah tumpang tindih
+          textfont=dict(color="#00f3ff", size=12, family="Arial Black"),
+          opacity=0.6,
+      )
+  )
+
+  # 2. Line Chart untuk Downtime (Menit) - Warna Neon Oranye ditaruh di atasnya
   fig.add_trace(
       go.Scatter(
           x=df["Tahun"],
@@ -87,9 +102,7 @@ with col2:
           mode="lines+markers+text",
           text=df["Downtime"],
           textposition="top center",
-          textfont=dict(
-              color="#ffffff", size=13, family="Arial Black"
-          ),  # Warna teks nilai putih terang agar sangat jelas
+          textfont=dict(color="#ffffff", size=13, family="Arial Black"),
           line=dict(color="#ff6600", width=4),
           marker=dict(
               size=11,
@@ -99,24 +112,7 @@ with col2:
       )
   )
 
-  # Bar Chart untuk Frekuensi (Kali) - Warna Neon Cyan/Biru dengan Label Angka di Dalamnya
-  fig.add_trace(
-      go.Bar(
-          x=df["Tahun"],
-          y=df["Frekuensi"],
-          name="Frekuensi (kali)",
-          marker_color="#00f3ff",
-          yaxis="y2",
-          text=df["Frekuensi"],  # Memunculkan angka nilai data pada batang
-          textposition="inside",  # Posisi teks di dalam batang
-          textfont=dict(
-              color="#0b0f19", size=12, family="Arial Black"
-          ),  # Warna teks kontras dengan batang
-          opacity=0.75,
-      )
-  )
-
-  # Layout Grafik dengan Rentang Sumbu Y yang Luas agar Teks & Anotasi Jelas Terlihat
+  # Layout Grafik dengan Rentang Sumbu Y yang Lega agar Tidak Bertumpuk
   fig.update_layout(
       title="<b>Trending Kejadian Gangguan & Downtime (Neon Theme)</b>",
       xaxis=dict(
@@ -134,7 +130,7 @@ with col2:
           title=dict(text="<b>Frekuensi (kali)</b>", font=dict(color="#00f3ff")),
           overlaying="y",
           side="right",
-          range=[0, 5],
+          range=[0, 6],  # Diperbesar agar teks 'outside' batangnya aman
           showgrid=False,
       ),
       legend=dict(
