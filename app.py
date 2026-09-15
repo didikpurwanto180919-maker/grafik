@@ -78,7 +78,7 @@ with col2:
   # --- GRAFIK NEON STYLE ---
   fig = go.Figure()
 
-  # 1. Bar Chart untuk Frekuensi (Kali) - Tanpa teks angka di batangnya agar bersih dari tumpukan
+  # 1. Bar Chart untuk Frekuensi (Kali) - Bersih tanpa teks angka menumpuk
   fig.add_trace(
       go.Bar(
           x=df["Tahun"],
